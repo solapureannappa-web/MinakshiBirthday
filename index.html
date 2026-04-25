@@ -17,37 +17,21 @@
     }
     body { background: var(--cream); font-family: 'Lato', sans-serif; color: var(--dark); overflow-x: hidden; }
 
-    /* ── HIDDEN YOUTUBE PLAYER ── */
-    #yt-player {
-      position: fixed;
-      top: -9999px; left: -9999px;
-      width: 1px; height: 1px;
-      opacity: 0; pointer-events: none;
-    }
-
     /* ── FLOATING MUSIC BUTTON ── */
     #music-btn {
-      position: fixed;
-      bottom: 24px; right: 24px;
+      position: fixed; bottom: 24px; right: 24px;
       width: 56px; height: 56px;
       background: linear-gradient(135deg, var(--rose), #c0154a);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       font-size: 24px;
       box-shadow: 0 6px 20px rgba(232,65,106,0.5);
-      cursor: pointer;
-      z-index: 10000;
-      border: none;
-      animation: floatBtn 3s ease-in-out infinite;
+      cursor: pointer; z-index: 10000; border: none;
       transition: transform .2s;
     }
     #music-btn:active { transform: scale(.9); }
-    @keyframes floatBtn {
-      0%,100% { box-shadow: 0 6px 20px rgba(232,65,106,0.5); }
-      50%      { box-shadow: 0 10px 30px rgba(232,65,106,0.8); }
-    }
 
-    /* ── OVERLAY — feels like unwrapping a gift ── */
+    /* ── OVERLAY ── */
     #tap-overlay {
       position: fixed; inset: 0;
       background: radial-gradient(ellipse at center, #5c1a3a 0%, #2a0e1f 100%);
@@ -55,79 +39,57 @@
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       text-align: center; padding: 30px;
-      transition: opacity 0.8s ease, transform 0.8s ease;
+      transition: opacity 0.5s ease;
     }
-    #tap-overlay.hide {
-      opacity: 0;
-      pointer-events: none;
-      transform: scale(1.08);
-    }
+    #tap-overlay.hide { opacity: 0; pointer-events: none; }
 
-    /* Animated ribbon decoration */
     #tap-overlay::before, #tap-overlay::after {
-      content: '';
-      position: absolute;
-      border-radius: 50%;
+      content: ''; position: absolute; border-radius: 50%;
       background: rgba(247,201,72,0.06);
-      animation: ripple 4s ease-in-out infinite;
     }
-    #tap-overlay::before { width: 500px; height: 500px; animation-delay: 0s; }
-    #tap-overlay::after  { width: 750px; height: 750px; animation-delay: 1.5s; }
-    @keyframes ripple { 0%,100%{transform:scale(1);opacity:.6;} 50%{transform:scale(1.1);opacity:1;} }
+    #tap-overlay::before { width:500px; height:500px; animation: ripple 4s ease-in-out infinite; }
+    #tap-overlay::after  { width:750px; height:750px; animation: ripple 4s ease-in-out infinite 1.5s; }
+    @keyframes ripple { 0%,100%{transform:scale(1);} 50%{transform:scale(1.1);} }
 
     .gift-box {
-      font-size: 80px;
-      animation: float 2.5s ease-in-out infinite;
-      filter: drop-shadow(0 10px 30px rgba(247,201,72,0.4));
-      margin-bottom: 20px;
+      font-size: 80px; margin-bottom: 20px;
       position: relative; z-index: 1;
+      animation: float 2.5s ease-in-out infinite;
     }
     @keyframes float { 0%,100%{transform:translateY(0) rotate(-3deg);} 50%{transform:translateY(-16px) rotate(3deg);} }
 
     #tap-overlay h2 {
-      font-family: 'Playfair Display', serif;
-      color: white; font-size: clamp(22px, 5vw, 32px);
-      margin-bottom: 10px;
+      font-family: 'Playfair Display', serif; color: white;
+      font-size: clamp(22px, 5vw, 32px); margin-bottom: 10px;
       position: relative; z-index: 1;
-      text-shadow: 0 2px 20px rgba(0,0,0,0.4);
     }
-    #tap-overlay .name-gold {
-      color: var(--gold);
-      font-style: italic;
-    }
+    .name-gold { color: var(--gold); font-style: italic; }
     #tap-overlay p {
-      color: rgba(255,255,255,0.65);
-      font-size: 15px; margin-bottom: 36px;
-      line-height: 1.7;
+      color: rgba(255,255,255,0.65); font-size: 15px;
+      margin-bottom: 36px; line-height: 1.7;
       position: relative; z-index: 1;
     }
-    #tap-overlay .start-btn {
+    .start-btn {
       background: linear-gradient(135deg, var(--gold), #e6a800);
       color: var(--dark); border: none;
       padding: 18px 48px; font-size: 17px; font-weight: 700;
-      font-family: 'Lato', sans-serif;
-      border-radius: 50px; cursor: pointer;
-      box-shadow: 0 8px 30px rgba(247,201,72,0.5);
-      letter-spacing: 1px;
-      animation: glow 2s ease-in-out infinite;
-      position: relative; z-index: 1;
-      transition: transform .15s;
+      font-family: 'Lato', sans-serif; border-radius: 50px; cursor: pointer;
+      letter-spacing: 1px; position: relative; z-index: 1;
+      animation: glow 2s ease-in-out infinite; transition: transform .15s;
     }
-    #tap-overlay .start-btn:active { transform: scale(.96); }
+    .start-btn:active { transform: scale(.96); }
     @keyframes glow {
       0%,100% { box-shadow: 0 8px 25px rgba(247,201,72,0.5); }
       50%      { box-shadow: 0 8px 50px rgba(247,201,72,0.9); }
     }
-    .music-hint {
-      margin-top: 18px;
-      font-size: 13px;
-      color: rgba(255,255,255,0.35);
-      letter-spacing: 1px;
+    .volume-hint {
+      margin-top: 16px; font-size: 13px;
+      color: rgba(255,255,255,0.4); letter-spacing: 1px;
       position: relative; z-index: 1;
     }
 
     /* ── CONFETTI ── */
-    #confetti-canvas { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:999; }
+    #confetti-canvas { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1; }
 
     /* ── HERO ── */
     .hero {
@@ -190,7 +152,7 @@
     .song-section .section-title { color:white; margin-bottom:12px; }
     .song-section .sub { color:rgba(255,255,255,0.6); margin-bottom:30px; font-style:italic; font-size:15px; }
     .video-wrap { border-radius:20px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.5); border:3px solid rgba(247,201,72,0.4); }
-    .video-wrap iframe { width:100%; height:420px; display:block; border:none; }
+    .video-wrap iframe { width:100%; height:360px; display:block; border:none; }
 
     /* ── FOOTER ── */
     .footer { text-align:center; padding:60px 24px; background:var(--dark); color:rgba(255,255,255,0.6); }
@@ -201,7 +163,7 @@
     .footer .sig{ margin-top:30px; color:var(--gold); font-family:'Playfair Display',serif; font-style:italic; font-size:20px; }
 
     /* ── PETAL ── */
-    .petal { position:fixed; pointer-events:none; animation:fall linear infinite; z-index:0; }
+    .petal { position:fixed; pointer-events:none; animation:fall linear infinite; z-index:2; }
     @keyframes fall { 0%{transform:translateY(-60px) rotate(0deg);opacity:1;} 100%{transform:translateY(110vh) rotate(720deg);opacity:0;} }
 
     /* ── LIGHTBOX ── */
@@ -213,32 +175,39 @@
     @media(max-width:540px){
       .gallery-grid { grid-template-rows:150px 150px 140px; }
       .message-card { padding:38px 18px; }
-      .video-wrap iframe { height:260px; }
+      .video-wrap iframe { height:220px; }
     }
   </style>
 </head>
 <body>
 
-<!-- ══ HIDDEN YOUTUBE AUDIO PLAYER ══ -->
-<iframe id="yt-player"
-  src=""
-  allow="autoplay">
-</iframe>
+<!--
+  ╔══════════════════════════════════════════════════════╗
+  ║  🎵 SONG SOURCE — UPDATE THIS AFTER GITHUB UPLOAD   ║
+  ║                                                      ║
+  ║  1. Upload  jaisemerat_NkIxrAeA.mp3  to GitHub      ║
+  ║  2. Open the file on GitHub → click "Raw"            ║
+  ║  3. Copy that raw URL and paste it in src below      ║
+  ║                                                      ║
+  ║  Raw URL looks like:                                 ║
+  ║  https://raw.githubusercontent.com/USERNAME/         ║
+  ║    REPO/main/jaisemerat_NkIxrAeA.mp3                ║
+  ╚══════════════════════════════════════════════════════╝
+-->
+<audio id="bg-audio" loop preload="auto">
+  <source src="https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/jaisemerat_NkIxrAeA.mp3" type="audio/mpeg"/>
+</audio>
 
 <!-- ══ FLOATING MUSIC BUTTON ══ -->
 <button id="music-btn" title="Toggle Music">🎵</button>
 
-<!-- ══ GIFT-UNWRAP OVERLAY ══
-     Browsers require a user gesture before playing audio.
-     This single tap IS that gesture — and it feels like part of the birthday experience. -->
+<!-- ══ ONE-TAP OVERLAY ══ -->
 <div id="tap-overlay">
   <div class="gift-box">🎁</div>
-  <h2>You have a gift,<br><span class="name-gold">Minakshi</span> 🌸</h2>
-  <p>Tap the button below to unwrap<br>your birthday surprise with music 🎶</p>
-  <button class="start-btn" onclick="startExperience()">
-    🌸 Unwrap My Gift 🌸
-  </button>
-  <p class="music-hint">🔊 Turn your volume up!</p>
+  <h2>A Gift for You,<br><span class="name-gold">Minakshi</span> 🌸</h2>
+  <p>Tap once to unwrap your<br>birthday surprise 🎶</p>
+  <button class="start-btn" id="startBtn">🌸 Open My Birthday Surprise 🌸</button>
+  <p class="volume-hint">🔊 Turn your volume up!</p>
 </div>
 
 <canvas id="confetti-canvas"></canvas>
@@ -311,9 +280,14 @@
   <div class="song-inner">
     <p class="section-label">🎵 A Song Just for You</p>
     <h2 class="section-title">Playing in the Background 🎶</h2>
-    <p class="sub">This song is already playing for you… feel it! 🎧💕</p>
+    <p class="sub">This song is playing just for you… feel it! 🎧💕</p>
     <div class="video-wrap">
-      <iframe src="https://www.youtube.com/embed/oGkmFMP3lCM?rel=0" title="Birthday Song for Minakshi" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe
+        src="https://www.youtube.com/embed/oGkmFMP3lCM?rel=0"
+        title="Birthday Song for Minakshi"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
     </div>
   </div>
 </div>
@@ -327,33 +301,35 @@
 </div>
 
 <script>
-  /* ── Music State ── */
-  let musicPlaying = false;
-  const player = document.getElementById('yt-player');
+  const audio    = document.getElementById('bg-audio');
   const musicBtn = document.getElementById('music-btn');
-  const overlay = document.getElementById('tap-overlay');
+  const overlay  = document.getElementById('tap-overlay');
+  const startBtn = document.getElementById('startBtn');
+  let musicPlaying = false;
 
-  /* startExperience — triggered by the ONE required user gesture.
-     After this tap, the browser allows audio, so music starts immediately. */
-  function startExperience() {
-    // Start music via the hidden iframe
-    player.src = "https://www.youtube.com/embed/oGkmFMP3lCM?autoplay=1&loop=1&playlist=oGkmFMP3lCM&controls=0&mute=0";
-    musicPlaying = true;
-    musicBtn.textContent = '🎵';
-
-    // Animate overlay away smoothly
+  startBtn.addEventListener('click', () => {
+    // Dismiss overlay instantly
     overlay.classList.add('hide');
-    setTimeout(() => { overlay.style.display = 'none'; }, 900);
-  }
+    setTimeout(() => { overlay.style.display = 'none'; }, 550);
 
-  /* Toggle music button */
+    // Play the song — works because this is a direct user click
+    audio.volume = 1.0;
+    audio.play()
+      .then(() => { musicPlaying = true; musicBtn.textContent = '🎵'; })
+      .catch(err => {
+        console.warn('Audio play failed:', err);
+        musicBtn.textContent = '▶️';
+      });
+  });
+
+  // Floating toggle button
   musicBtn.addEventListener('click', () => {
     if (musicPlaying) {
-      player.src = '';
+      audio.pause();
       musicBtn.textContent = '▶️';
       musicPlaying = false;
     } else {
-      player.src = "https://www.youtube.com/embed/oGkmFMP3lCM?autoplay=1&loop=1&playlist=oGkmFMP3lCM&controls=0&mute=0";
+      audio.play();
       musicBtn.textContent = '🎵';
       musicPlaying = true;
     }
@@ -370,10 +346,22 @@
   function draw(){ctx.clearRect(0,0,W,H);particles.forEach(p=>{ctx.save();ctx.globalAlpha=.85;ctx.translate(p.x,p.y);ctx.rotate(p.angle*Math.PI/180);ctx.fillStyle=p.color;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore();p.y+=p.speed;p.x+=p.drift;p.angle+=p.spin;if(p.y>H+20)Object.assign(p,cp());});requestAnimationFrame(draw);}
   draw();
 
-  /* ── Floating Petals ── */
+  /* ── Petals ── */
   const petals=['🌸','🌺','💐','🌷','✨','🎀'];
   for(let i=0;i<8;i++){const el=document.createElement('span');el.className='petal';el.textContent=petals[Math.floor(Math.random()*petals.length)];el.style.cssText=`left:${Math.random()*100}vw;animation-duration:${Math.random()*8+6}s;animation-delay:${Math.random()*10}s;font-size:${Math.random()*14+14}px;`;document.body.appendChild(el);}
 
   /* ── Message Reveal ── */
   const lines=['m1','m2','m3','m4','m5','m6'];let step=0;
-  function revealNext(){if(step<lines.length){document.getElementById(lines[step]).classList.add('visible');step++;}if(step>=lines.length){const b=document.getElementById('revealBtn');b.textContent="💖 That's All My Love!";b.disa
+  function revealNext(){if(step<lines.length){document.getElementById(lines[step]).classList.add('visible');step++;}if(step>=lines.length){const b=document.getElementById('revealBtn');b.textContent="💖 That's All My Love!";b.disabled=true;}}
+
+  /* ── Lightbox ── */
+  function openLightbox(src){document.getElementById('lightbox-img').src=src;document.getElementById('lightbox').classList.add('active');}
+  function closeLightbox(){document.getElementById('lightbox').classList.remove('active');}
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();});
+
+/* ── Scroll Reveal ── */
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),Number(e.target.dataset.delay||0));obs.unobserve(e.target);}});},{threshold:.2});
+  document.querySelectorAll('.wish-card').forEach(c=>obs.observe(c));
+</script>
+</body>
+</html>
